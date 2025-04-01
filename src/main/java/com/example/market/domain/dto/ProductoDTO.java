@@ -1,6 +1,6 @@
 package com.example.market.domain.dto;
 
-public class ProductoDTO {
+public class ProductDTO {
 
     private Long id;
     private String name;

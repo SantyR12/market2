@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import com.example.market.domain.dto.ProductoDTO;
+import com.example.market.domain.dto.ProductDTO;
 import com.example.market.infraestructura.entity.Producto;
 
 @Mapper(componentModel = "spring")
@@ -20,13 +20,13 @@ public interface ProductoMapper {
             @Mapping(target = "description", source = "descripcion"),
             @Mapping(target = "price", source = "precio")
     })
-    ProductoDTO toProductoDTO(Producto producto);
+    ProductDTO toProductoDTO(Producto producto);
     
-    List<ProductoDTO> toProductosDTO(List<Producto> productos);
+    List<ProductDTO> toProductosDTO(List<Producto> productos);
     
     @InheritInverseConfiguration
-    Producto toProducto(ProductoDTO productoDTO);
-    List<Producto> toProductos(List<ProductoDTO> productosDTO);
+    Producto toProducto(ProductDTO productoDTO);
+    List<Producto> toProductos(List<ProductDTO> productosDTO);
 
     
 }
