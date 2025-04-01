@@ -1,4 +1,4 @@
-package com.example.market;
+package com.example.market.infraestructura.entity;
 
 
 import jakarta.persistence.Entity;
@@ -20,7 +20,6 @@ public class Producto {
 
     public Producto() {
     }
-
 
     public Long getId() {
         return id;
@@ -53,5 +52,8 @@ public class Producto {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
+
+
+    
 
 }
