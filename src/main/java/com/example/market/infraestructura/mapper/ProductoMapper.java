@@ -2,12 +2,12 @@ package com.example.market.infraestructura.mapper;
 
 import java.util.List;
 
+import com.example.market.domain.dto.ProductDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import com.example.market.domain.dto.ProductDTO;
 import com.example.market.infraestructura.entity.Producto;
 
 @Mapper(componentModel = "spring")
