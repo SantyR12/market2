@@ -6,6 +6,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private Double price;
+    private Integer stock;
    
 
     public Long getId() {
@@ -32,8 +33,12 @@ public class ProductDTO {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
 
-    
-    
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 }
