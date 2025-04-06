@@ -7,7 +7,12 @@ import java.util.List;
 public interface IProduct {
     
     List<ProductDTO> getAll();
+
     void create(ProductDTO productDTO);
+
+    void update(ProductDTO productDTO);
+
+    void delete(Long id);
 
  
     

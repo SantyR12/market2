@@ -22,4 +22,10 @@ public class ProductService {
     public void crearProducto(ProductDTO productDTO) {
         productoImpl.create(productDTO);
     }
+    public void actualizarProducto(ProductDTO productDTO) {
+        productoImpl.update(productDTO);
+    }
+    public void eliminarProducto(Long id) {
+        productoImpl.delete(id);
+    }
 } 
