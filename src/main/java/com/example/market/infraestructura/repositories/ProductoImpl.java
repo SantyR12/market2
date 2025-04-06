@@ -39,7 +39,7 @@ public class ProductoImpl implements IProduct  {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + productDTO.getId()));
 
         Producto productoActualizado = productoMapper.toProducto(productDTO);
-        productoActualizado.setId(productoExistente.getId()); // aseguramos que mantenga el mismo ID
+        productoActualizado.setId(productoExistente.getId());
 
         productoRepository.save(productoActualizado);
     }

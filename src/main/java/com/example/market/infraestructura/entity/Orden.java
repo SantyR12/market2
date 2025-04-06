@@ -1,4 +1,5 @@
 package com.example.market.infraestructura.entity;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -9,13 +10,17 @@ public class Orden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer Fecha;
+    private Date Fecha;
     private Integer total;
     private String  estado;
+
+
 
     @ManyToOne
     @JoinColumn(name= "cliente_id")
     private Cliente cliente;
+
+
 
     @OneToMany(mappedBy = "orden")
     private List<Pago> pagos;
@@ -30,11 +35,11 @@ public class Orden {
         this.id = id;
     }
 
-    public Integer getFecha() {
+    public Date getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Integer fecha) {
+    public void setFecha(Date fecha) {
         Fecha = fecha;
     }
 
