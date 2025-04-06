@@ -11,7 +11,7 @@ public class OrdenItem extends Orden {
     private Double precioUnitarios;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
 

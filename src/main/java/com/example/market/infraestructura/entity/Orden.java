@@ -3,6 +3,7 @@ import java.util.List;
 
 import jakarta.persistence.*;
 @Entity
+
 public class Orden {
 
     @Id
@@ -13,10 +14,10 @@ public class Orden {
     private String  estado;
 
     @ManyToOne
-    @JoinColumn(name= "id")
+    @JoinColumn(name= "cliente_id")
     private Cliente cliente;
 
-    @OneToMany
+    @OneToMany(mappedBy = "orden")
     private List<Pago> pagos;
 
 

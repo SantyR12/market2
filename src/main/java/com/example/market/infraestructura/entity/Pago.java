@@ -15,7 +15,7 @@ public class Pago {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "orden_id")
     private Orden orden;
 
     public Long getId() {

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="clientes")
 public class Cliente {
 
     @Id
@@ -14,6 +15,9 @@ public class Cliente {
     private String email;
     private String direccion;
     private Integer telefono;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Orden> ordenes;
 
 
     public Long getId() {
@@ -55,7 +59,6 @@ public class Cliente {
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
-    @OneToMany(mappedBy = "cliente")
-    private List<Orden> ordenes;
+
 
 }

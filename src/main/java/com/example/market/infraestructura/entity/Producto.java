@@ -15,7 +15,7 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private Double precio;
-    private Integer stok;
+    private Integer stock;
 
     @OneToMany(mappedBy = "producto")
     private List<OrdenItem> ordenItems;
@@ -55,11 +55,11 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Integer getStok() {
-        return stok;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setStok(Integer stok) {
-        this.stok = stok;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }
