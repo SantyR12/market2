@@ -14,9 +14,9 @@ public class Cliente {
     private String nombre;
     private String email;
     private String direccion;
-    private Integer telefono;
+    private String telefono;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente")
     private List<Orden> ordenes;
 
 
@@ -52,11 +52,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
