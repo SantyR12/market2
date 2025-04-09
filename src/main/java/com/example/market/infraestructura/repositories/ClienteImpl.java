@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteImpl implements IClient {
@@ -23,6 +24,10 @@ public class ClienteImpl implements IClient {
     public List<ClientDTO> getAll() {
         List<Cliente> clientes = clienteRepository.findAll();
         return clienteMapper.toClienteDTO(clientes);
+
+    }
+    public Optional<ClientDTO> getById(Long id) {
+        return clienteRepository.findById(id).map(clienteMapper::toClienteDTO);
 
     }
 

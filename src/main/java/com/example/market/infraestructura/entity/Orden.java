@@ -10,7 +10,7 @@ public class Orden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date Fecha;
+    private String Fecha;
     private Integer total;
     private String  estado;
 
@@ -35,11 +35,11 @@ public class Orden {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         Fecha = fecha;
     }
 

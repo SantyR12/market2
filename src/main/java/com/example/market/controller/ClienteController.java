@@ -22,6 +22,12 @@ public class ClienteController {
         return clientService.obtenerTodo();
 
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientDTO> obtenerClientePorId(@PathVariable Long id){
+        return clientService.obtenerClientePorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
     @PostMapping
     public ResponseEntity<String> createClient(@RequestBody ClientDTO clientDTO){
         clientService.crearCliente(clientDTO);

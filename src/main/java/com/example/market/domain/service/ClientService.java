@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -17,6 +18,9 @@ public class ClientService {
 
     public List<ClientDTO> obtenerTodo() {
         return clienteImpl.getAll();
+    }
+    public Optional<ClientDTO> obtenerClientePorId(Long id) {
+        return clienteImpl.getById(id);
     }
     public void crearCliente(ClientDTO clientDTO) {
         clienteImpl.create(clientDTO);

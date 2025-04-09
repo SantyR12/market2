@@ -24,6 +24,13 @@ public class ProductoController {
 
         return productService.obtenerTodo();
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> obtenerProductoPorId(@PathVariable Long id) {
+        return productService.obtenerProductoPorId(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody ProductDTO productDTO) {
         productService.crearProducto(productDTO);

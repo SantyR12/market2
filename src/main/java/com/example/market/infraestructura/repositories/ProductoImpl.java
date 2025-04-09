@@ -1,6 +1,7 @@
 package com.example.market.infraestructura.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.market.domain.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import com.example.market.domain.repository.IProduct;
 import com.example.market.infraestructura.crud.ProductoRepository;
 import com.example.market.infraestructura.entity.Producto;
 import com.example.market.infraestructura.mapper.ProductoMapper;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class ProductoImpl implements IProduct  {
@@ -25,6 +25,9 @@ public class ProductoImpl implements IProduct  {
     public List<ProductDTO> getAll() {
         List<Producto> productos = productoRepository.findAll();
         return productoMapper.toProductosDTO(productos);
+    }
+    public Optional<ProductDTO> getById(Long id) {
+        return productoRepository.findById(id).map(productoMapper::toProductoDTO);
     }
     public void create(ProductDTO productDTO) {
         Producto producto = productoMapper.toProducto(productDTO);
