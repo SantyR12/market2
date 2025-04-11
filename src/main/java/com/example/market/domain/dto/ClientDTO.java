@@ -6,7 +6,7 @@ public class ClientDTO {
     private String name;
     private String email;
     private String direction;
-    private Integer telefono;
+    private String phone;
 
     public Long getId() {
         return id;
@@ -40,11 +40,11 @@ public class ClientDTO {
         this.direction = direction;
     }
 
-    public Integer getTelefono() {
-        return telefono;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

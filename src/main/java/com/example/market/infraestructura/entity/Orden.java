@@ -1,4 +1,5 @@
 package com.example.market.infraestructura.entity;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -13,12 +14,18 @@ public class Orden {
     private Integer total;
     private String  estado;
 
+
+
     @ManyToOne
     @JoinColumn(name= "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "orden")
+
+    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL )
     private List<Pago> pagos;
+
+    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrdenItem> items;
 
 
     public Long getId() {

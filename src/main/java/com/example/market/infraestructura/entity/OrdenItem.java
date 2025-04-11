@@ -3,19 +3,23 @@ package com.example.market.infraestructura.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class OrdenItem extends Orden {
+@Table(name= "ordenitems")
+public class OrdenItem  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
-    private Double precioUnitarios;
+    @Column(name = "precio_unitario", nullable = false)
+    private Double precioUnitario;
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "orden_id")
+    private Orden orden;
 
     public Long getId() {
         return id;
@@ -33,11 +37,29 @@ public class OrdenItem extends Orden {
         this.cantidad = cantidad;
     }
 
-    public Double getPrecioUnitarios() {
-        return precioUnitarios;
+    public Double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPrecioUnitarios(Double precioUnitarios) {
-        this.precioUnitarios = precioUnitarios;
+    public void setPrecioUnitario(Double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Orden orden) {
+        this.orden = orden;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+
 }

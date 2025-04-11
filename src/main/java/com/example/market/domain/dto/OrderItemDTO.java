@@ -1,10 +1,36 @@
 package com.example.market.domain.dto;
 
+import com.example.market.infraestructura.entity.Orden;
+
+
+import java.util.List;
+
+
 public class OrderItemDTO {
 
     private long id;
     private Integer quantity;
     private Double unitPrice;
+
+    private Orden orden;
+
+    private ProductDTO producto;
+
+    public ProductDTO getProducto() {
+        return producto;
+    }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Orden orden) {
+        this.orden = orden;
+    }
+
+    public void setProducto(ProductDTO producto) {
+        this.producto = producto;
+    }
 
     public Integer getQuantity() {
         return quantity;
@@ -29,4 +55,5 @@ public class OrderItemDTO {
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
+
 }

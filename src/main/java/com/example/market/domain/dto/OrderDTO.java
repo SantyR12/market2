@@ -1,11 +1,18 @@
 package com.example.market.domain.dto;
 
+import com.example.market.infraestructura.entity.OrdenItem;
+
+import java.util.Date;
+
+import java.util.Set;
+
 public class OrderDTO {
 
     private Long id;
     private String date;
     private Integer total;
     private String status;
+    private Set<OrdenItem> ordenItem;
 
     public Long getId() {
         return id;

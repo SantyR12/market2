@@ -9,13 +9,13 @@ public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer fechaPago;
+    private String fechaPago;
     private Double monto;
     private String metodo;
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "orden_id")
+    @JoinColumn(name = "orden_id", nullable = true)
     private Orden orden;
 
     public Long getId() {
@@ -26,11 +26,11 @@ public class Pago {
         this.id = id;
     }
 
-    public Integer getFechaPago() {
+    public String getFechaPago() {
         return fechaPago;
     }
 
-    public void setFechaPago(Integer fechaPago) {
+    public void setFechaPago(String fechaPago) {
         this.fechaPago = fechaPago;
     }
 
