@@ -71,8 +71,9 @@ public class OrdenItemImpl implements IOrderItem {
     public List<OrderItemDTO> getAll() {
         return ordenItemMapper.toOrdenItemsDTO(orderItemRepository.findAll());
     }
+
     public OrderItemDTO actualizarOrdenItem(Long id, OrderItemDTO dto) {
-        OrdenItem existente = orderItemRepository.findById(id)
+        OrdenItem ordenItem = orderItemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item no encontrado"));
 
         Producto producto = productoRepository.findById(dto.getProducto().getId())
@@ -81,12 +82,13 @@ public class OrdenItemImpl implements IOrderItem {
         Orden orden = ordenRepository.findById(dto.getOrden().getId())
                 .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
 
-        existente.setCantidad(dto.getQuantity());
-        existente.setPrecioUnitario(dto.getUnitPrice());
-        existente.setProducto(producto);
-        existente.setOrden(orden);
+        ordenItem.setCantidad(dto.getQuantity());
+        ordenItem.setPrecioUnitario(dto.getUnitPrice());
+        ordenItem.setProducto(producto);
+        ordenItem.setOrden(orden);
 
-        return ordenItemMapper.toOrdenItemDTO(orderItemRepository.save(existente));
+        OrdenItem updated = orderItemRepository.save(ordenItem);
+        return ordenItemMapper.toOrdenItemDTO(updated);
     }
 
 
