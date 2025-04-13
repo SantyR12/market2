@@ -9,3 +9,4 @@ import com.example.market.infraestructura.entity.Producto;
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
 }
+
