@@ -42,6 +42,7 @@ public class OrdenController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderService.delete(id);
         return ResponseEntity.noContent().build();
+
     }
 
     @GetMapping("/cliente/{clienteId}")

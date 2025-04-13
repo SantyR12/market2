@@ -32,17 +32,23 @@ public class OrdenItemImpl implements IOrderItem {
 
     public OrderItemDTO crearOrdenItem(OrderItemDTO dto) {
 
-        /*productoRepository.findAll()
-        Producto producto = productoRepository.findById(dto.getProducto())
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Producto producto = productoRepository.findById(dto.getProducto().getId())
+                .orElseThrow(() -> new RuntimeException("No existe el producto"));
 
-        Orden orden = ordenRepository.findById(dto.getOrdenId())
-                .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
+        Orden orden  = ordenRepository.findById(dto.getOrden().getId())
+                .orElseThrow(() -> new  RuntimeException("orden no encontrada"));
 
-        OrdenItem entity = ordenItemMapper.toOrdenItem(dto, producto, orden);
+        OrdenItem entity = new OrdenItem();
+        entity.setProducto(producto);
+        entity.setOrden(orden);
+        entity.setCantidad(dto.getQuantity());
+        entity.setPrecioUnitario(dto.getUnitPrice());
+
+        // Guardar el item en la base de datos
         OrdenItem saved = orderItemRepository.save(entity);
-        return ordenItemMapper.toOrdenItemDTO(saved);*/
-        return null;
+
+        // Convertir la entidad guardada a un DTO para devolverlo
+        return ordenItemMapper.toOrdenItemDTO(saved);
     }
 
     public OrderItemDTO obtenerOrdenItemPorId(Long id) {
@@ -65,5 +71,23 @@ public class OrdenItemImpl implements IOrderItem {
     public List<OrderItemDTO> getAll() {
         return ordenItemMapper.toOrdenItemsDTO(orderItemRepository.findAll());
     }
+    public OrderItemDTO actualizarOrdenItem(Long id, OrderItemDTO dto) {
+        OrdenItem existente = orderItemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item no encontrado"));
+
+        Producto producto = productoRepository.findById(dto.getProducto().getId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        Orden orden = ordenRepository.findById(dto.getOrden().getId())
+                .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
+
+        existente.setCantidad(dto.getQuantity());
+        existente.setPrecioUnitario(dto.getUnitPrice());
+        existente.setProducto(producto);
+        existente.setOrden(orden);
+
+        return ordenItemMapper.toOrdenItemDTO(orderItemRepository.save(existente));
+    }
+
 
 }

@@ -23,19 +23,11 @@ public interface OrdenItemMapper {
     })
     OrderItemDTO toOrdenItemDTO(OrdenItem ordenItem);
 
-    List<OrderItemDTO> toOrdenItemsDTO(List<OrdenItem> ordenItems);
 
     @InheritInverseConfiguration
-    @Mappings({
-            @Mapping(target = "producto", ignore = true),
-            @Mapping(target = "orden", ignore = true)
-    })
     OrdenItem toOrdenItem(OrderItemDTO dto);
 
-    default OrdenItem toOrdenItem(OrderItemDTO dto, Producto producto, Orden orden) {
-        OrdenItem item = toOrdenItem(dto);
-        item.setProducto(producto);
-        item.setOrden(orden);
-        return item;
-    }
+
+    List<OrderItemDTO> toOrdenItemsDTO(List<OrdenItem> all);
+
 }

@@ -23,6 +23,10 @@ public class OrderItemService {
         return ordenItemImpl.obtenerOrdenItemPorId(id);
     }
 
+    public OrderItemDTO actualizarOrdenItem(Long id, OrderItemDTO dto) {
+        return ordenItemImpl.actualizarOrdenItem(id, dto);
+    }
+
 
     public List<OrderItemDTO> obtenerItemsPorOrden(Long ordenId) {
         return ordenItemImpl.obtenerItemsPorOrden(ordenId);

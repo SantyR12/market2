@@ -11,9 +11,7 @@ public class OrderItemDTO {
     private long id;
     private Integer quantity;
     private Double unitPrice;
-
     private Orden orden;
-
     private ProductDTO producto;
 
     public ProductDTO getProducto() {
