@@ -63,7 +63,7 @@ public class OrderItemController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        Producto producto = productoRepository.findById(dto.getId())
+        Producto producto = productoRepository.findById(dto.getProducto().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
 
         OrdenItem ordenItem = new OrdenItem();
