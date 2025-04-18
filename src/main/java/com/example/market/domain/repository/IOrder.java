@@ -10,9 +10,9 @@ public interface IOrder {
 
     OrderDTO getById(Long id);
 
-    void save(OrderDTO orderDTO);
+    OrderDTO save(OrderDTO orderDTO);
 
-    void update(Long id, OrderDTO orderDTO);
+    OrderDTO update(Long id, OrderDTO orderDTO);
 
     void delete(Long id);
 

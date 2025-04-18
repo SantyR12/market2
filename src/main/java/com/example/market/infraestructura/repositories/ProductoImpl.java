@@ -29,11 +29,13 @@ public class ProductoImpl implements IProduct  {
     public Optional<ProductDTO> getById(Long id) {
         return productoRepository.findById(id).map(productoMapper::toProductoDTO);
     }
-    public void create(ProductDTO productDTO) {
+    public ProductDTO create(ProductDTO productDTO) {
         Producto producto = productoMapper.toProducto(productDTO);
-        productoRepository.save(producto);
+        Producto productoGuardado = productoRepository.save(producto);
+        return productoMapper.toProductoDTO(productoGuardado);
     }
-    public void update(ProductDTO productDTO) {
+
+    public ProductDTO update(ProductDTO productDTO) {
         if (productDTO.getId() == null) {
             throw new IllegalArgumentException("ID requerido para actualizar el producto.");
         }
@@ -44,7 +46,8 @@ public class ProductoImpl implements IProduct  {
         Producto productoActualizado = productoMapper.toProducto(productDTO);
         productoActualizado.setId(productoExistente.getId());
 
-        productoRepository.save(productoActualizado);
+        Producto productoGuardado = productoRepository.save(productoActualizado);
+        return productoMapper.toProductoDTO(productoGuardado);
     }
     public void delete(Long id) {
         productoRepository.deleteById(id);

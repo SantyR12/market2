@@ -23,11 +23,13 @@ public class ProductService {
         return productoImpl.getById(id);
     }
 
-    public void crearProducto(ProductDTO productDTO) {
-        productoImpl.create(productDTO);
+
+    public ProductDTO crearProducto(ProductDTO productDTO) {
+        return productoImpl.create(productDTO);
     }
-    public void actualizarProducto(ProductDTO productDTO) {
-        productoImpl.update(productDTO);
+
+    public ProductDTO actualizarProducto(ProductDTO productDTO) {
+        return productoImpl.update(productDTO);
     }
     public void eliminarProducto(Long id) {
         productoImpl.delete(id);

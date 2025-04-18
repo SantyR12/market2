@@ -3,6 +3,7 @@ package com.example.market.controller;
 import com.example.market.domain.dto.OrderDTO;
 import com.example.market.domain.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,15 +28,15 @@ public class OrdenController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody OrderDTO orderDTO) {
-        orderService.save(orderDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<OrderDTO> save(@RequestBody OrderDTO orderDTO) {
+        OrderDTO savedOrder = orderService.save(orderDTO);
+        return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
-        orderService.update(id, orderDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<OrderDTO> update(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
+        OrderDTO updatedOrder = orderService.update(id, orderDTO);
+        return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

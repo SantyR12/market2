@@ -11,9 +11,8 @@ public interface IProduct {
 
     Optional<ProductDTO> getById(Long id);
 
-    void create(ProductDTO productDTO);
-
-    void update(ProductDTO productDTO);
+    ProductDTO create(ProductDTO productDTO);
+    ProductDTO update(ProductDTO productDTO);
 
     void delete(Long id);
 

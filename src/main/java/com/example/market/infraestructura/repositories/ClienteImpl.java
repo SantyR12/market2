@@ -32,26 +32,21 @@ public class ClienteImpl implements IClient {
     }
 
 
-    public void create(ClientDTO clientDTO) {
-        Cliente cliente = clienteMapper.toCliente(clientDTO);
-        clienteRepository.save(cliente);
-
+    public ClientDTO create(ClientDTO clientDTO) {
+        Cliente entity = clienteMapper.toCliente(clientDTO);
+        Cliente savedEntity = clienteRepository.save(entity);
+        return clienteMapper.toClienteDTO(savedEntity);
     }
 
-    public void update(ClientDTO clientDTO) {
-        if (clientDTO.getId() == null) {
-            throw new NullPointerException("ID es requerido en el campo");
-
+    public ClientDTO update(ClientDTO clientDTO) {
+        Optional<Cliente> optionalCliente = clienteRepository.findById(clientDTO.getId());
+        if (optionalCliente.isPresent()) {
+            Cliente cliente = clienteMapper.toCliente(clientDTO);
+            Cliente clienteActualizado = clienteRepository.save(cliente);
+            return clienteMapper.toClienteDTO(clienteActualizado);
+        } else {
+            throw new RuntimeException("Cliente no encontrado");
         }
-        Cliente clienteExistente = clienteRepository.findById(clientDTO.getId())
-                .orElseThrow(() -> new RuntimeException("cliente no encontrado con id: " + clientDTO.getId()));
-
-        Cliente clienteActualizado = clienteMapper.toCliente(clientDTO);
-        clienteActualizado.setId(clienteExistente.getId());
-
-        clienteRepository.save(clienteActualizado);
-
-
     }
     public void delete(Long id) {
         clienteRepository.deleteById(id);

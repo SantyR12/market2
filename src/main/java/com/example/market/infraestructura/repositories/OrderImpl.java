@@ -27,34 +27,32 @@ public class OrderImpl implements IOrder {
     @Autowired
     private OrdenMapper ordenMapper;
 
-    @Override
+
     public List<OrderDTO> getAll() {
         return ordenMapper.toOrderDTO(ordenRepository.findAll());
     }
 
-    @Override
+
     public OrderDTO getById(Long id) {
         return ordenRepository.findById(id)
                 .map(ordenMapper::toOrderDTO)
                 .orElse(null);
     }
 
-    @Override
-    public void save(OrderDTO orderDTO) {
+    public OrderDTO save(OrderDTO orderDTO) {
         Orden orden = ordenMapper.toOrden(orderDTO);
-        ordenRepository.save(orden);
+        Orden saved = ordenRepository.save(orden);
+        return ordenMapper.toOrderDTO(saved);
     }
 
-    @Override
-    public void update(Long id, OrderDTO dto) {
+
+    public OrderDTO update(Long id, OrderDTO dto) {
         Orden orden = ordenRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
-
 
         orden.setFecha(dto.getDate());
         orden.setTotal(dto.getTotal());
         orden.setEstado(dto.getStatus());
-
 
         Cliente clienteExistente = clienteRepository.findById(dto.getCliente().getId())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
@@ -78,16 +76,16 @@ public class OrderImpl implements IOrder {
         orden.getOrdenItems().clear();
         orden.getOrdenItems().addAll(nuevosItems);
 
-
-        ordenRepository.save(orden);
+        Orden updated = ordenRepository.save(orden);
+        return ordenMapper.toOrderDTO(updated);
     }
 
-    @Override
+
     public void delete(Long id) {
         ordenRepository.deleteById(id);
     }
 
-    @Override
+
     public List<OrderDTO> getByClienteId(Long clienteId) {
         List<Orden> ordenes = ordenRepository.findByClienteId(clienteId);
         return ordenMapper.toOrderDTO(ordenes);

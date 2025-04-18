@@ -9,8 +9,8 @@ public interface IClient {
 
     List<ClientDTO> getAll();
     Optional<ClientDTO> getById(Long id);
-    void create(ClientDTO clientDTO);
-    void update(ClientDTO clientDTO);
+    ClientDTO create(ClientDTO clientDTO);
+    ClientDTO update(ClientDTO clientDTO);
     void delete(Long id);
 
 }
