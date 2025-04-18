@@ -3,7 +3,6 @@ package com.example.market.controller;
 
 import com.example.market.domain.dto.OrderDTO;
 import com.example.market.domain.dto.OrderItemDTO;
-import com.example.market.domain.repository.IOrderItem;
 import com.example.market.domain.service.OrderItemService;
 import com.example.market.domain.service.OrderService;
 import com.example.market.infraestructura.crud.OrderItemRepository;
@@ -16,10 +15,7 @@ import com.example.market.infraestructura.mapper.OrdenMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
