@@ -32,23 +32,27 @@ public class PagoImpl implements IPay  {
         List<Pago> pagos = pagoRepository.findAll();
         return pagoMapper.toPagosDTO(pagos);
     }
-    public void create(PayDTO payDTO) {
+    public PayDTO create(PayDTO payDTO) {
         Pago pago = pagoMapper.toPago(payDTO);
-        pagoRepository.save(pago);
+        Pago guardado = pagoRepository.save(pago);
+        return pagoMapper.toPagoDTO(guardado);
     }
-    public void update(PayDTO payDTO) {
+    
+    public PayDTO update(PayDTO payDTO) {
         if (payDTO.getId() == null) {
-            throw new IllegalArgumentException("ID requerido para actualizar el producto.");
+            throw new IllegalArgumentException("ID requerido para actualizar el pago.");
         }
-
+    
         Pago pagoExistente = pagoRepository.findById(payDTO.getId())
                 .orElseThrow(() -> new RuntimeException("Pago no encontrado con ID: " + payDTO.getId()));
-
+    
         Pago pagoActualizado = pagoMapper.toPago(payDTO);
         pagoActualizado.setId(pagoExistente.getId());
-
-        pagoRepository.save(pagoActualizado);
+    
+        Pago guardado = pagoRepository.save(pagoActualizado);
+        return pagoMapper.toPagoDTO(guardado);
     }
+    
     public void delete(Long id) {
         pagoRepository.deleteById(id);
     }
