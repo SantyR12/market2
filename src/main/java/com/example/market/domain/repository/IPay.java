@@ -9,9 +9,9 @@ public interface IPay {
     
     List<PayDTO> getAll();
 
-    void create(PayDTO payDTO);
+    PayDTO create(PayDTO payDTO);
 
-    void update(PayDTO payDTO);
+    PayDTO update(PayDTO payDTO);
 
     void delete(Long id);
 

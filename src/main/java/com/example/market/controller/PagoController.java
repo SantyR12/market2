@@ -26,16 +26,18 @@ public class PagoController {
         return payService.obtenerTodo();
     }
     @PostMapping
-    public ResponseEntity<String> createPay(@RequestBody PayDTO payDTO) {
-        payService.crearPago(payDTO);
-        return new ResponseEntity<>("Pago registrado exitosamente", HttpStatus.CREATED);
+    public ResponseEntity<PayDTO> createPay(@RequestBody PayDTO payDTO) {
+        PayDTO creado = payService.crearPago(payDTO);
+        return new ResponseEntity<>(creado, HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<String> updatePago(@PathVariable Long id,@RequestBody PayDTO payDTO) {
+    public ResponseEntity<PayDTO> updatePago(@PathVariable Long id, @RequestBody PayDTO payDTO) {
         payDTO.setId(id);
-        payService.actualizarPago(payDTO);
-        return new ResponseEntity<>("Pago modificado exitosamente", HttpStatus.OK);
+        PayDTO actualizado = payService.actualizarPago(payDTO);
+        return new ResponseEntity<>(actualizado, HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePago(@PathVariable Long id) {
         payService.eliminarPago(id);
