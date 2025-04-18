@@ -8,8 +8,13 @@ import java.util.List;
 public interface IOrder {
     List<OrderDTO> getAll();
 
-    void create(OrderDTO order);
-    void update(OrderDTO order);
-    void delete(OrderDTO order);
+    OrderDTO getById(Long id);
 
+    void save(OrderDTO orderDTO);
+
+    void update(Long id, OrderDTO orderDTO);
+
+    void delete(Long id);
+
+    List<OrderDTO> getByClienteId(Long clienteId);
 }

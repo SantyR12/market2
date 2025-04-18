@@ -1,7 +1,6 @@
 package com.example.market.infraestructura.entity;
-
+import java.util.Date;
 import jakarta.persistence.*;
-
 
 @Entity
 public class Pago {
@@ -9,14 +8,17 @@ public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String fechaPago;
+    private String Fecha;
     private Double monto;
     private String metodo;
     private String estado;
 
+    // Movido al final
     @ManyToOne
     @JoinColumn(name = "orden_id")
     private Orden orden;
+
+    // Getters y setters
 
     public Long getId() {
         return id;
@@ -26,14 +28,13 @@ public class Pago {
         this.id = id;
     }
 
-    public String getFechaPago() {
-        return fechaPago;
+    public String getFecha() {
+        return Fecha;
     }
 
-    public void setFechaPago(String fechaPago) {
-        this.fechaPago = fechaPago;
+    public void setFecha(String fecha) {
+        Fecha = fecha;
     }
-
     public Double getMonto() {
         return monto;
     }
@@ -56,5 +57,13 @@ public class Pago {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Orden orden) {
+        this.orden = orden;
     }
 }

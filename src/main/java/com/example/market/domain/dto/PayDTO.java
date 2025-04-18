@@ -2,9 +2,11 @@ package com.example.market.domain.dto;
 
 public class PayDTO {
     private Long id;
-    private Integer payDate;
+    private String date;
     private Integer amount;
+    private String method;
     private String status;
+    private OrderDTO orden;
 
     public Long getId() {
         return id;
@@ -12,14 +14,6 @@ public class PayDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getPayDate() {
-        return payDate;
-    }
-
-    public void setPayDate(Integer payDate) {
-        this.payDate = payDate;
     }
 
     public Integer getAmount() {
@@ -37,4 +31,30 @@ public class PayDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public OrderDTO getOrden() {
+        return orden;
+    }
+
+    public void setOrden(OrderDTO orden) {
+        this.orden = orden;
+    }
+
+    
 }
