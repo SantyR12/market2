@@ -25,21 +25,22 @@ public class PagoController {
 
         return payService.obtenerTodo();
     }
+    @GetMapping("/{id}")
+    public PayDTO obtenerPorId(@PathVariable Long id) {
+        return payService.obtenerPorId(id);
+
+    }
     @PostMapping
-    public ResponseEntity<String> createPay(@RequestBody PayDTO payDTO) {
-        payService.crearPago(payDTO);
-        return new ResponseEntity<>("Pago registrado exitosamente", HttpStatus.CREATED);
+    public PayDTO createPay(@RequestBody PayDTO payDTO) {
+        return payService.crearPago(payDTO);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> updatePago(@PathVariable Long id,@RequestBody PayDTO payDTO) {
-        payDTO.setId(id);
-        payService.actualizarPago(payDTO);
-        return new ResponseEntity<>("Pago modificado exitosamente", HttpStatus.OK);
+    public PayDTO updatePago(@PathVariable Long id,@RequestBody PayDTO payDTO) {
+        return payService.actualizarPago(id, payDTO);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePago(@PathVariable Long id) {
+    public void deletePago(@PathVariable Long id) {
         payService.eliminarPago(id);
-        return new ResponseEntity<>("Pago eliminado exitosamente", HttpStatus.OK);
     }
     
     @GetMapping("/orden/{ordenId}")

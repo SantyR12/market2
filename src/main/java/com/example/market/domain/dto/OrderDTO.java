@@ -11,10 +11,11 @@ public class OrderDTO {
 
     private Long id;
     private String date;
-    private Integer total;
+    private Double total;
     private String status;
-    private List<OrderItemDTO> ordenItems;
+    private Set<OrderItemDTO> ordenItems;
     private ClientDTO cliente;
+    private Set<PayDTO> pays;
 
     public Long getId() {
         return id;
@@ -32,11 +33,11 @@ public class OrderDTO {
         this.date = date;
     }
 
-    public Integer getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -48,11 +49,11 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public List<OrderItemDTO> getOrdenItems() {
+    public Set<OrderItemDTO> getOrdenItems() {
         return ordenItems;
     }
 
-    public void setOrdenItems(List<OrderItemDTO> ordenItems) {
+    public void setOrdenItems(Set<OrderItemDTO> ordenItems) {
         this.ordenItems = ordenItems;
     }
 
@@ -62,5 +63,13 @@ public class OrderDTO {
 
     public void setCliente(ClientDTO cliente) {
         this.cliente = cliente;
+    }
+
+    public Set<PayDTO> getPays() {
+        return pays;
+    }
+
+    public void setPays(Set<PayDTO> pays) {
+        this.pays = pays;
     }
 }

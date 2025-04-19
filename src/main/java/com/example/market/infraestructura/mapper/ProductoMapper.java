@@ -19,15 +19,15 @@ public interface ProductoMapper {
             @Mapping(target = "name", source = "nombre"),
             @Mapping(target = "description", source = "descripcion"),
             @Mapping(target = "price", source = "precio"),
-            @Mapping(target = "stock", source = "stock")
+            @Mapping(target = "stock", source = "stock"),
+
     })
-    ProductDTO toProductoDTO(Producto producto);
-    
+    ProductDTO toProductDTO(Producto producto);
     List<ProductDTO> toProductosDTO(List<Producto> productos);
     
     @InheritInverseConfiguration
     Producto toProducto(ProductDTO productoDTO);
-    List<Producto> toProductos(List<ProductDTO> productosDTO);
+    List<Producto> toProducts(List<ProductDTO> productsDTO);
 
     
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class ClientService {
+
     @Autowired
     private ClienteImpl clienteImpl;
 
@@ -19,14 +20,14 @@ public class ClientService {
     public List<ClientDTO> obtenerTodo() {
         return clienteImpl.getAll();
     }
-    public Optional<ClientDTO> obtenerClientePorId(Long id) {
+    public ClientDTO obtenerClientePorId(Long id) {
         return clienteImpl.getById(id);
     }
-    public void crearCliente(ClientDTO clientDTO) {
-        clienteImpl.create(clientDTO);
+    public ClientDTO crearCliente(ClientDTO clientDTO) {
+        return clienteImpl.create(clientDTO);
     }
-    public void actualizarCliente(ClientDTO clientDTO) {
-        clienteImpl.update(clientDTO);
+    public ClientDTO actualizarCliente(Long id,ClientDTO clientDTO) {
+        return clienteImpl.update(id,clientDTO);
     }
     public void eliminarCliente(Long id) {
         clienteImpl.delete(id);

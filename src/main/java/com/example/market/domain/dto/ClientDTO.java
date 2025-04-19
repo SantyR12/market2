@@ -1,5 +1,9 @@
 package com.example.market.domain.dto;
 
+import org.aspectj.weaver.ast.Or;
+
+import java.util.Set;
+
 public class ClientDTO {
 
     private Long id;
@@ -7,6 +11,15 @@ public class ClientDTO {
     private String email;
     private String direction;
     private String phone;
+    private Set<OrderDTO> orders;
+
+    public Set<OrderDTO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderDTO> orders) {
+        this.orders = orders;
+    }
 
     public Long getId() {
         return id;

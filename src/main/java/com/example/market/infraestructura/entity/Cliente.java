@@ -3,6 +3,7 @@ package com.example.market.infraestructura.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="clientes")
@@ -17,8 +18,15 @@ public class Cliente {
     private String telefono;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Orden> ordenes;
+    private Set<Orden> ordenes;
 
+    public Set<Orden> getOrdenes() {
+        return ordenes;
+    }
+
+    public void setOrdenes(Set<Orden> ordenes) {
+        this.ordenes = ordenes;
+    }
 
     public Long getId() {
         return id;

@@ -10,7 +10,7 @@ import org.mapstruct.Mappings;
 
 import com.example.market.infraestructura.entity.Pago;
 
-@Mapper(componentModel = "spring", uses = {OrdenMapper.class})
+@Mapper(componentModel = "spring", uses = {OrdenMapper.class, OrdenItemMapper.class})
 public interface PagoMapper {
     
 
@@ -22,13 +22,13 @@ public interface PagoMapper {
             @Mapping(target = "status", source = "estado"),
             @Mapping(target = "orden", source = "orden")
     })
-    PayDTO toPagoDTO(Pago pago);
+    PayDTO toPayDTO(Pago pago);
     
-    List<PayDTO> toPagosDTO(List<Pago> pagos);
+    List<PayDTO> toPaymentsDTO(List<Pago> pagos);
     
     @InheritInverseConfiguration
     Pago toPago(PayDTO pagoDTO);
-    List<Pago> toPagos(List<PayDTO> pagossDTO);
+    List<Pago> toPayments(List<PayDTO> paymentsDTO);
 
     
 }

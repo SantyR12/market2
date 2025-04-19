@@ -19,15 +19,15 @@ public class ProductService {
     public List<ProductDTO> obtenerTodo() {
         return productoImpl.getAll();
     }
-    public Optional<ProductDTO> obtenerProductoPorId(Long id) {
+    public ProductDTO obtenerProductoPorId(Long id) {
         return productoImpl.getById(id);
     }
 
-    public void crearProducto(ProductDTO productDTO) {
-        productoImpl.create(productDTO);
+    public ProductDTO crearProducto(ProductDTO productDTO) {
+        return productoImpl.create(productDTO);
     }
-    public void actualizarProducto(ProductDTO productDTO) {
-        productoImpl.update(productDTO);
+    public ProductDTO actualizarProducto(Long id,ProductDTO productDTO) {
+        return productoImpl.update(id,productDTO);
     }
     public void eliminarProducto(Long id) {
         productoImpl.delete(id);

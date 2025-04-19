@@ -1,9 +1,11 @@
 package com.example.market.infraestructura.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="productos")
@@ -18,7 +20,16 @@ public class Producto {
     private Integer stock;
 
     @OneToMany(mappedBy = "producto")
-    private List<OrdenItem> ordenItems;
+    @JsonBackReference
+    private Set<OrdenItem> ordenItems;
+
+    public Set<OrdenItem> getOrdenItems() {
+        return ordenItems;
+    }
+
+    public void setOrdenItems(Set<OrdenItem> ordenItems) {
+        this.ordenItems = ordenItems;
+    }
 
     public Producto() {
     }

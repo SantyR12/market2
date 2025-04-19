@@ -3,7 +3,7 @@ package com.example.market.domain.dto;
 public class PayDTO {
     private Long id;
     private String date;
-    private Integer amount;
+    private Double amount;
     private String method;
     private String status;
     private OrderDTO orden;
@@ -16,11 +16,11 @@ public class PayDTO {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

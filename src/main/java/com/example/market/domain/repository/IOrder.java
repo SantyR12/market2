@@ -6,15 +6,15 @@ import com.example.market.domain.dto.OrderDTO;
 import java.util.List;
 
 public interface IOrder {
+
     List<OrderDTO> getAll();
 
     OrderDTO getById(Long id);
 
-    void save(OrderDTO orderDTO);
+    OrderDTO save(OrderDTO orderDTO);
 
-    void update(Long id, OrderDTO orderDTO);
+    OrderDTO update(Long id, OrderDTO orderDTO);
 
     void delete(Long id);
 
-    List<OrderDTO> getByClienteId(Long clienteId);
 }

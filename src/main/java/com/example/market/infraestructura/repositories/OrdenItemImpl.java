@@ -12,7 +12,9 @@ import com.example.market.infraestructura.mapper.OrdenItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,75 +22,68 @@ public class OrdenItemImpl implements IOrderItem {
 
     @Autowired
     private OrdenRepository ordenRepository;
-
     @Autowired
     private OrderItemRepository orderItemRepository;
-
     @Autowired
     private ProductoRepository productoRepository;
-
     @Autowired
     private OrdenItemMapper ordenItemMapper;
 
-    public OrderItemDTO crearOrdenItem(OrderItemDTO dto) {
-
-        Producto producto = productoRepository.findById(dto.getProducto().getId())
-                .orElseThrow(() -> new RuntimeException("No existe el producto"));
-
-        Orden orden  = ordenRepository.findById(dto.getOrden().getId())
-                .orElseThrow(() -> new  RuntimeException("orden no encontrada"));
-
-        OrdenItem entity = new OrdenItem();
-        entity.setProducto(producto);
-        entity.setOrden(orden);
-        entity.setCantidad(dto.getQuantity());
-        entity.setPrecioUnitario(dto.getUnitPrice());
-
-        // Guardar el item en la base de datos
-        OrdenItem saved = orderItemRepository.save(entity);
-
-        // Convertir la entidad guardada a un DTO para devolverlo
-        return ordenItemMapper.toOrdenItemDTO(saved);
+    public List<OrderItemDTO> getAll(Long id) {
+        Orden orden = ordenRepository.findById(id).orElseThrow(()->new RuntimeException("No se encontro el orden"));
+        Set<OrdenItem> ordenItems = orden.getOrdenItems();
+        List<OrdenItem> orderItems = new ArrayList<>(ordenItems);
+        return ordenItemMapper.toOrdenItemsDTO(orderItems);
     }
 
-    public OrderItemDTO obtenerOrdenItemPorId(Long id) {
-        return orderItemRepository.findById(id)
-                .map(ordenItemMapper::toOrdenItemDTO)
-                .orElseThrow(() -> new RuntimeException("Item no encontrado"));
-    }
-
-    public List<OrderItemDTO> obtenerItemsPorOrden(Long ordenId) {
-        return orderItemRepository.findByOrden_Id(ordenId)
-                .stream()
-                .map(ordenItemMapper::toOrdenItemDTO)
-                .collect(Collectors.toList());
-    }
-
-    public void eliminarOrdenItem(Long id) {
-        orderItemRepository.deleteById(id);
-    }
-
-    public List<OrderItemDTO> getAll() {
-        return ordenItemMapper.toOrdenItemsDTO(orderItemRepository.findAll());
-    }
-
-    public OrderItemDTO actualizarOrdenItem(Long id, OrderItemDTO dto) {
-        OrdenItem ordenItem = orderItemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Item no encontrado"));
-
-        Producto producto = productoRepository.findById(dto.getProducto().getId())
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-
-        Orden orden = ordenRepository.findById(dto.getOrden().getId())
-                .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
-
-        ordenItem.setCantidad(dto.getQuantity());
-        ordenItem.setPrecioUnitario(dto.getUnitPrice());
-        ordenItem.setProducto(producto);
+    public OrderItemDTO crearOrdenItem(Long id,OrderItemDTO orderItemDTO) {
+        Orden orden = ordenRepository.findById(id).orElseThrow(()->new RuntimeException("No se encontro el orden"));
+        Producto producto = productoRepository.findById(orderItemDTO.getProducto().getId()).orElseThrow(()-> new RuntimeException("Producto no encontrado"));
+        OrdenItem ordenItem = ordenItemMapper.toOrdenItem(orderItemDTO);
+        double total = orden.getTotal();
         ordenItem.setOrden(orden);
+        ordenItem.setProducto(producto);
+        ordenItem.setPrecioUnitario(producto.getPrecio());
+        total += ordenItem.getPrecioUnitario() * producto.getPrecio();
+        orden.setTotal(total);
+        ordenRepository.save(orden);
+        return ordenItemMapper.toOrdenItemDTO(orderItemRepository.save(ordenItem));
+    }
 
-        OrdenItem updated = orderItemRepository.save(ordenItem);
-        return ordenItemMapper.toOrdenItemDTO(updated);
+
+    public void eliminarOrdenItem(Long id, Long ordenItemId) {
+        Orden orden = ordenRepository.findById(id).orElseThrow(()->new RuntimeException("No se encontro el orden"));
+        OrdenItem ordenItem = orderItemRepository.findById(ordenItemId).orElseThrow(()->new RuntimeException("No se encontro el ordenItem"));
+        double total = orden.getTotal();
+        if (!ordenItem.getOrden().getId().equals(orden.getId())) {
+            throw new RuntimeException("El orden item no tiene un orden");
+        }
+        total -= ordenItem.getPrecioUnitario() * ordenItem.getCantidad();
+        orden.setTotal(total);
+        ordenRepository.save(orden);
+        orderItemRepository.deleteById(ordenItemId);
+
+    }
+    public OrderItemDTO updateOrdenItemPor(Long id, Long orderItemId, OrderItemDTO dto) {
+        Orden orden = ordenRepository.findById(id).orElseThrow(()->new RuntimeException("No se encontro el orden"));
+        OrdenItem ordenItemToUpdate = orderItemRepository.findById(orderItemId).orElseThrow(()->new RuntimeException("No se encontro el ordenItem"));
+        OrdenItem updateOrdenItem = ordenItemMapper.toOrdenItem(dto);
+        Producto producto = productoRepository.findById(updateOrdenItem.getProducto().getId()).orElseThrow(()->new RuntimeException("Producto no encontrado"));
+        double total = orden.getTotal();
+        if (!ordenItemToUpdate.getProducto().getId().equals(orden.getId())) {
+            throw new RuntimeException("El orden no pertenece a la orden ");
+        }
+        total -= ordenItemToUpdate.getPrecioUnitario() * ordenItemToUpdate.getCantidad();
+        ordenItemToUpdate.setCantidad(updateOrdenItem.getCantidad());
+        ordenItemToUpdate.setPrecioUnitario(producto.getPrecio());
+        ordenItemToUpdate.setProducto(updateOrdenItem.getProducto());
+        ordenItemToUpdate.setOrden(orden);
+        total += ordenItemToUpdate.getPrecioUnitario() * producto.getPrecio();
+        orden.setTotal(total);
+        ordenRepository.save(orden);
+        return ordenItemMapper.toOrdenItemDTO(orderItemRepository.save(ordenItemToUpdate));
+
+
     }
 
 

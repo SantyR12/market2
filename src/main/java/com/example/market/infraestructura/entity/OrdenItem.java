@@ -1,7 +1,5 @@
 package com.example.market.infraestructura.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,19 +8,16 @@ public class OrdenItem  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
-
-    @Column(name = "precio_unitario", nullable = false)
     private Double precioUnitario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id",referencedColumnName = "id",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "producto_id",nullable = false)
     private Producto producto;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orden_id")
+    @ManyToOne
+    @JoinColumn(name = "orden_id", nullable = false)
+
     private Orden orden;
 
     public Long getId() {

@@ -11,6 +11,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface OrdenItemMapper {
@@ -22,12 +23,13 @@ public interface OrdenItemMapper {
             @Mapping(source = "orden", target = "orden")
     })
     OrderItemDTO toOrdenItemDTO(OrdenItem ordenItem);
+    List<OrderItemDTO> toOrdenItemsDTO(List<OrdenItem> ordenItems);
 
 
     @InheritInverseConfiguration
     OrdenItem toOrdenItem(OrderItemDTO dto);
+    List<OrdenItem> toOrdenItems(List<OrderItemDTO> orderItemDTO);
 
 
-    List<OrderItemDTO> toOrdenItemsDTO(List<OrdenItem> all);
 
 }

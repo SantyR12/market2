@@ -14,31 +14,20 @@ public class OrderItemService {
     private OrdenItemImpl ordenItemImpl;
 
 
-    public OrderItemDTO crearOrdenItem(OrderItemDTO dto) {
-        return ordenItemImpl.crearOrdenItem(dto);
+    public List<OrderItemDTO> getAll(Long orderId) {
+        return ordenItemImpl.getAll(orderId);
+    }
+
+    public OrderItemDTO save(Long orderId, OrderItemDTO orderItem) {
+        return ordenItemImpl.crearOrdenItem(orderId,orderItem);
     }
 
 
-    public OrderItemDTO obtenerOrdenItemPorId(Long id) {
-        return ordenItemImpl.obtenerOrdenItemPorId(id);
+    public OrderItemDTO update(Long id, Long OrderItemDTOId, OrderItemDTO ordenItem) {
+        return ordenItemImpl.updateOrdenItemPor(id, OrderItemDTOId, ordenItem);
     }
 
-    public OrderItemDTO actualizarOrdenItem(Long id, OrderItemDTO dto) {
-        return ordenItemImpl.actualizarOrdenItem(id, dto);
-    }
-
-
-    public List<OrderItemDTO> obtenerItemsPorOrden(Long ordenId) {
-        return ordenItemImpl.obtenerItemsPorOrden(ordenId);
-    }
-
-
-    public void eliminarOrdenItem(Long id) {
-        ordenItemImpl.eliminarOrdenItem(id);
-    }
-
-
-    public List<OrderItemDTO> getAll() {
-        return ordenItemImpl.getAll();
+    public void delete(Long id, Long OrderItemDTOId) {
+        ordenItemImpl.eliminarOrdenItem(id,OrderItemDTOId);
     }
 }

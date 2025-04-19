@@ -26,32 +26,28 @@ public class ClienteImpl implements IClient {
         return clienteMapper.toClienteDTO(clientes);
 
     }
-    public Optional<ClientDTO> getById(Long id) {
-        return clienteRepository.findById(id).map(clienteMapper::toClienteDTO);
+    public ClientDTO getById(Long id) {
+        Cliente cliente = clienteRepository.findById(id).get();
+        return clienteMapper.toClienteDTO(cliente);
+
 
     }
 
 
-    public void create(ClientDTO clientDTO) {
+    public ClientDTO create(ClientDTO clientDTO) {
         Cliente cliente = clienteMapper.toCliente(clientDTO);
-        clienteRepository.save(cliente);
+        return clienteMapper.toClienteDTO(clienteRepository.save(cliente));
 
     }
 
-    public void update(ClientDTO clientDTO) {
-        if (clientDTO.getId() == null) {
-            throw new NullPointerException("ID es requerido en el campo");
-
-        }
-        Cliente clienteExistente = clienteRepository.findById(clientDTO.getId())
-                .orElseThrow(() -> new RuntimeException("cliente no encontrado con id: " + clientDTO.getId()));
-
-        Cliente clienteActualizado = clienteMapper.toCliente(clientDTO);
-        clienteActualizado.setId(clienteExistente.getId());
-
-        clienteRepository.save(clienteActualizado);
-
-
+    public ClientDTO update(Long id,ClientDTO clientDTO) {
+      Cliente cliente = clienteRepository.findById(id).orElseThrow(()-> new RuntimeException("Cliente no encontrado"));
+      Cliente clienteUpdate = clienteMapper.toCliente(clientDTO);
+      cliente.setNombre(clienteUpdate.getNombre());
+      cliente.setEmail(clienteUpdate.getEmail());
+      cliente.setDireccion( clienteUpdate.getDireccion());
+      cliente.setTelefono(clienteUpdate.getTelefono());
+      return clienteMapper.toClienteDTO(clienteRepository.save(cliente));
     }
     public void delete(Long id) {
         clienteRepository.deleteById(id);

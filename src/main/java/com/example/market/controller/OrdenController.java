@@ -21,28 +21,23 @@ public class OrdenController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> getById(@PathVariable Long id) {
-        OrderDTO order = orderService.getById(id);
-        return (order != null) ? ResponseEntity.ok(order) : ResponseEntity.notFound().build();
+    public OrderDTO getById(@PathVariable Long id) {
+        return orderService.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody OrderDTO orderDTO) {
-        orderService.save(orderDTO);
-        return ResponseEntity.ok().build();
+    public OrderDTO save(@RequestBody OrderDTO orderDTO) {
+        return orderService.save(orderDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
-        orderService.update(id, orderDTO);
-        return ResponseEntity.ok().build();
+    public OrderDTO update(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
+        return orderService.update(id, orderDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         orderService.delete(id);
-        return ResponseEntity.noContent().build();
-
     }
 
     @GetMapping("/cliente/{clienteId}")

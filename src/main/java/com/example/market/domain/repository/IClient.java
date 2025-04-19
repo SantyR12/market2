@@ -1,17 +1,18 @@
 package com.example.market.domain.repository;
 import java.util.List;
-import java.util.Optional;
+
 
 import com.example.market.domain.dto.ClientDTO;
 
 
 public interface IClient {
 
-    List<ClientDTO> getAll();
-    Optional<ClientDTO> getById(Long id);
-    void create(ClientDTO clientDTO);
-    void update(ClientDTO clientDTO);
-    void delete(Long id);
+    public List<ClientDTO> getAll();
+    public ClientDTO getById(Long id);
+    public ClientDTO create(ClientDTO clientDTO);
+    public ClientDTO update(Long id ,ClientDTO clientDTO);
+    public void  delete(Long id);
+
 
 }
 

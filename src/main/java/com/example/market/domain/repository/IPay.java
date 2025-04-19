@@ -7,14 +7,16 @@ import java.util.List;
 
 public interface IPay {
     
-    List<PayDTO> getAll();
+    public List<PayDTO> getAll();
 
-    void create(PayDTO payDTO);
+    public PayDTO obtenerPorId(Long id);
 
-    void update(PayDTO payDTO);
+    public PayDTO create(PayDTO payDTO);
 
-    void delete(Long id);
+    public PayDTO update(Long id,PayDTO payDTO);
 
-    List<PayDTO> getByOrdenId(Long ordenId);
+    public void delete(Long id);
+
+    public List<PayDTO> getByOrdenId(Long ordenId);
     
 }

@@ -1,79 +1,53 @@
 package com.example.market.infraestructura.entity;
-import java.util.Date;
+
 import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 @Entity
-
+@Table(name = "orden")
 public class Orden {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Fecha;
-    private Integer total;
+    private String fecha;
+    private Double total;
     private String  estado;
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "orden")
-    private List<OrdenItem> ordenItems;
+    private Set<OrdenItem> ordenItems;
 
     @ManyToOne
-    @JoinColumn(name= "cliente_id")
+    @JoinColumn(name= "cliente_id", nullable = false)
     private Cliente cliente;
 
-
-    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL )
-    private List<Pago> pagos;
-
-
+    @OneToMany(mappedBy = "orden")
+    private Set<Pago> pagos;
 
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
     public String getFecha() {
-        return Fecha;
-    }
-
-    public List<OrdenItem> getOrdenItems() {
-        return ordenItems;
-    }
-
-    public void setOrdenItems(List<OrdenItem> ordenItems) {
-        this.ordenItems = ordenItems;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<Pago> getPagos() {
-        return pagos;
-    }
-
-    public void setPagos(List<Pago> pagos) {
-        this.pagos = pagos;
+        return fecha;
     }
 
     public void setFecha(String fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 
-    public Integer getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -83,5 +57,29 @@ public class Orden {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Set<OrdenItem> getOrdenItems() {
+        return ordenItems;
+    }
+
+    public void setOrdenItems(Set<OrdenItem> ordenItems) {
+        this.ordenItems = ordenItems;
+    }
+
+    public Set<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(Set<Pago> pagos) {
+        this.pagos = pagos;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

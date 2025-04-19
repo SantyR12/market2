@@ -7,15 +7,15 @@ import java.util.Optional;
 
 public interface IProduct {
     
-    List<ProductDTO> getAll();
+    public List<ProductDTO> getAll();
 
-    Optional<ProductDTO> getById(Long id);
+    public ProductDTO getById(Long id);
 
-    void create(ProductDTO productDTO);
+    public ProductDTO create(ProductDTO product);
 
-    void update(ProductDTO productDTO);
+    public ProductDTO update(Long id, ProductDTO productDTO);
 
-    void delete(Long id);
+    public void delete(Long id);
 
  
     

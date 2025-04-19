@@ -19,11 +19,14 @@ public class PayService {
     public List<PayDTO> obtenerTodo() {
         return pagoImpl.getAll();
     }
-    public void crearPago(PayDTO payDTO) {
-        pagoImpl.create(payDTO);
+    public PayDTO obtenerPorId(Long id) {
+        return pagoImpl.obtenerPorId(id);
     }
-    public void actualizarPago(PayDTO payDTO) {
-        pagoImpl.update(payDTO);
+    public PayDTO crearPago(PayDTO payDTO) {
+        return pagoImpl.create(payDTO);
+    }
+    public PayDTO actualizarPago(Long id, PayDTO payDTO) {
+        return pagoImpl.update(id,payDTO);
     }
     public void eliminarPago(Long id) {
         pagoImpl.delete(id);

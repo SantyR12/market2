@@ -3,6 +3,7 @@ import java.util.Date;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "pagos")
 public class Pago {
 
     @Id
@@ -13,12 +14,12 @@ public class Pago {
     private String metodo;
     private String estado;
 
-    // Movido al final
+
     @ManyToOne
-    @JoinColumn(name = "orden_id")
+    @JoinColumn(name = "orden_id", nullable = false)
     private Orden orden;
 
-    // Getters y setters
+
 
     public Long getId() {
         return id;

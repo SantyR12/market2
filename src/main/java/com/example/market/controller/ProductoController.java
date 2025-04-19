@@ -25,27 +25,24 @@ public class ProductoController {
         return productService.obtenerTodo();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> obtenerProductoPorId(@PathVariable Long id) {
-        return productService.obtenerProductoPorId(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ProductDTO obtenerProductoPorId(@PathVariable Long id) {
+        return productService.obtenerProductoPorId(id);
     }
 
     @PostMapping
-    public ResponseEntity<String> createProduct(@RequestBody ProductDTO productDTO) {
-        productService.crearProducto(productDTO);
-        return new ResponseEntity<>("Producto creado exitosamente", HttpStatus.CREATED);
+    public ProductDTO createProduct(@RequestBody ProductDTO entity) {
+        return productService.crearProducto(entity);
+
+
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateProducto(@PathVariable Long id,@RequestBody ProductDTO productDTO) {
-        productDTO.setId(id);
-        productService.actualizarProducto(productDTO);
-        return new ResponseEntity<>("Producto modificado exitosamente", HttpStatus.OK);
+    public ProductDTO updateProducto(@PathVariable Long id,@RequestBody ProductDTO entity) {
+        return productService.actualizarProducto(id,entity);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProducto(@PathVariable Long id) {
+    public void deleteProducto(@PathVariable Long id) {
         productService.eliminarProducto(id);
-        return new ResponseEntity<>("Producto eliminado exitosamente", HttpStatus.OK);
+
     }
     
     

@@ -9,6 +9,7 @@ import com.example.market.infraestructura.entity.Orden;
 import com.example.market.infraestructura.entity.OrdenItem;
 import com.example.market.infraestructura.mapper.OrdenItemMapper;
 import com.example.market.infraestructura.mapper.OrdenMapper;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,78 +17,45 @@ import java.util.List;
 
 @Service
 public class OrderImpl implements IOrder {
-    @Autowired
-    ClienteRepository clienteRepository;
 
-    @Autowired
-    private OrdenItemMapper ordenItemMapper;
     @Autowired
     private OrdenRepository ordenRepository;
 
     @Autowired
     private OrdenMapper ordenMapper;
 
-    @Override
+
     public List<OrderDTO> getAll() {
-        return ordenMapper.toOrderDTO(ordenRepository.findAll());
+        List<Orden> ordenes = ordenRepository.findAll();
+        return ordenMapper.toOrderDTO(ordenes);
     }
 
-    @Override
+
     public OrderDTO getById(Long id) {
-        return ordenRepository.findById(id)
-                .map(ordenMapper::toOrderDTO)
-                .orElse(null);
+        Orden orden = ordenRepository.findById(id).get();
+        return ordenMapper.toOrderDTO(orden);
     }
 
-    @Override
-    public void save(OrderDTO orderDTO) {
+
+    public OrderDTO save(OrderDTO orderDTO) {
         Orden orden = ordenMapper.toOrden(orderDTO);
-        ordenRepository.save(orden);
+        orden.setTotal(0.0);
+        return ordenMapper.toOrderDTO(ordenRepository.save(orden));
     }
 
-    @Override
-    public void update(Long id, OrderDTO dto) {
-        Orden orden = ordenRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
+    public OrderDTO update(Long id, OrderDTO order) {
+        Orden orden = ordenRepository.findById(id).orElseThrow(() -> new RuntimeException("Orden no encontrado"));
+        Orden updatedOrden = ordenMapper.toOrden(order);
+        orden.setFecha(updatedOrden.getFecha());
+        orden.setEstado(updatedOrden.getEstado());
+        return ordenMapper.toOrderDTO(ordenRepository.save(orden));
 
-
-        orden.setFecha(dto.getDate());
-        orden.setTotal(dto.getTotal());
-        orden.setEstado(dto.getStatus());
-
-
-        Cliente clienteExistente = clienteRepository.findById(dto.getCliente().getId())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-
-        clienteExistente.setNombre(dto.getCliente().getName());
-        clienteExistente.setEmail(dto.getCliente().getEmail());
-        clienteExistente.setDireccion(dto.getCliente().getDirection());
-        clienteExistente.setTelefono(dto.getCliente().getPhone());
-
-        clienteRepository.save(clienteExistente);
-        orden.setCliente(clienteExistente);
-
-        List<OrdenItem> nuevosItems = dto.getOrdenItems().stream()
-                .map(itemDTO -> {
-                    OrdenItem item = ordenItemMapper.toOrdenItem(itemDTO);
-                    item.setOrden(orden);
-                    return item;
-                })
-                .toList();
-
-        orden.getOrdenItems().clear();
-        orden.getOrdenItems().addAll(nuevosItems);
-
-
-        ordenRepository.save(orden);
     }
 
-    @Override
     public void delete(Long id) {
         ordenRepository.deleteById(id);
     }
 
-    @Override
     public List<OrderDTO> getByClienteId(Long clienteId) {
         List<Orden> ordenes = ordenRepository.findByClienteId(clienteId);
         return ordenMapper.toOrderDTO(ordenes);

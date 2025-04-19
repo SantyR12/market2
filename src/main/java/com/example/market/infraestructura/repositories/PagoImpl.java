@@ -18,44 +18,49 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Service
 public class PagoImpl implements IPay  {
 
-    @Autowired
-    OrdenRepository ordenRepository;
+
 
     @Autowired
     private PagoRepository pagoRepository;
 
-
     @Autowired
     private PagoMapper pagoMapper;
 
+    @Override
     public List<PayDTO> getAll() {
         List<Pago> pagos = pagoRepository.findAll();
-        return pagoMapper.toPagosDTO(pagos);
+        return pagoMapper.toPaymentsDTO(pagos);
     }
-    public void create(PayDTO payDTO) {
+    @Override
+    public PayDTO obtenerPorId(Long id) {
+        Pago pago = pagoRepository.findById(id).get();
+        return pagoMapper.toPayDTO(pago);
+    }
+    @Override
+    public PayDTO create(PayDTO payDTO) {
         Pago pago = pagoMapper.toPago(payDTO);
-        pagoRepository.save(pago);
+        return pagoMapper.toPayDTO(pagoRepository.save(pago));
     }
-    public void update(PayDTO payDTO) {
-        if (payDTO.getId() == null) {
-            throw new IllegalArgumentException("ID requerido para actualizar el producto.");
-        }
 
-        Pago pagoExistente = pagoRepository.findById(payDTO.getId())
-                .orElseThrow(() -> new RuntimeException("Pago no encontrado con ID: " + payDTO.getId()));
+    @Override
+    public PayDTO update(Long id,PayDTO payDTO) {
+        Pago pago = pagoRepository.findById(id).orElseThrow(()-> new RuntimeException("no existe el pago con el id:"));
+        Pago pagoUpdate = pagoMapper.toPago(payDTO);
+        pago.setFecha(pagoUpdate.getFecha());
+        pago.setMonto(pagoUpdate.getMonto());
+        pago.setMetodo(pagoUpdate.getMetodo());
+        pago.setEstado(pagoUpdate.getEstado());
+        return pagoMapper.toPayDTO(pagoRepository.save(pago));
 
-        Pago pagoActualizado = pagoMapper.toPago(payDTO);
-        pagoActualizado.setId(pagoExistente.getId());
-
-        pagoRepository.save(pagoActualizado);
     }
+    @Override
     public void delete(Long id) {
         pagoRepository.deleteById(id);
     }
-
+    @Override
     public List<PayDTO> getByOrdenId(Long ordenId) {
         List<Pago> pagos = pagoRepository.findByOrdenId(ordenId);
-        return pagoMapper.toPagosDTO(pagos);
+        return pagoMapper.toPaymentsDTO((pagos));
     }
 
     
