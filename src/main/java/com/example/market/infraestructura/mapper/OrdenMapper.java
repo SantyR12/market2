@@ -19,7 +19,7 @@ public interface OrdenMapper {
             @Mapping(target = "total", source = "total"),
             @Mapping(target = "status", source = "estado"),
             @Mapping(target = "cliente", source = "cliente"),  // Asegúrate de que 'cliente' esté en la entidad Orden
-            @Mapping(target = "ordenItems", source = "ordenItems", ignore = true)  // Asegúrate de que 'ordenItems' esté en la entidad Orden
+            @Mapping(target = "ordenItems", source = "ordenItems")  // Asegúrate de que 'ordenItems' esté en la entidad Orden
     })
 
     OrderDTO toOrderDTO(Orden orden);
@@ -27,7 +27,8 @@ public interface OrdenMapper {
     List<OrderDTO> toOrderDTO(List<Orden> ordenes);
 
     @InheritInverseConfiguration
-    @Mapping(target = "ordenItems", ignore = true)
+    @Mapping(target = "ordenItems")
     Orden toOrden(OrderDTO ordenDTO);
     List<Orden> toOrdenes(List<OrderDTO> ordenes);
+
 }
