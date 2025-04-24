@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "ea7f8d0e-24b2-4193-b444-9c5278b358e2",
+		"name": "Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "43805474",
+		"_collection_link": "https://sanporter.postman.co/workspace/San-Porter's-Workspace~a189bc65-88d5-403f-822c-995d71d04c27/collection/43805474-ea7f8d0e-24b2-4193-b444-9c5278b358e2?action=share&source=collection_link&creator=43805474"
+	},
+	"item": [
+		{
+			"name": "get",
+			"item": [
+				{
+					"name": "ordenItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8090/ordenes/10/items"
+					},
+					"response": []
+				},
+				{
+					"name": "/productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8090/productos"
+					},
+					"response": []
+				},
+				{
+					"name": "/clientes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"gohanss\",\r\n        \"email\": \"gohanssm@gmail.com\",\r\n        \"direction\": \"calles 12-65\",\r\n        \"phone\": \"3145603209\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "/ordenes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:8090/ordenes"
+					},
+					"response": []
+				},
+				{
+					"name": "/pagos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"08-09-2025\",\r\n    \"amount\":333333,\r\n    \"method\":\"PayPal\",\r\n    \"status\":\"Aprobado\",\r\n    \"orden\":{\r\n        \"id\":6\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/pagos"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "Clientes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"gohanss\",\r\n        \"email\": \"gohanssm@gmail.com\",\r\n        \"direction\": \"calles 12-65\",\r\n        \"phone\": \"3145603209\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "productos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"name\": \"papasss\",\r\n        \"description\": \"rizadas mayonesa\",\r\n        \"price\": 6000.0,\r\n        \"stock\": 80\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/productos"
+					},
+					"response": []
+				},
+				{
+					"name": "ordenes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"date\": \"2025-12-24\",\r\n        \"total\": 150000,\r\n        \"status\": \"ENTREGADO\",\r\n        \"ordenItems\": null,\r\n        \"cliente\": {\r\n            \"id\": 9\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/ordenes"
+					},
+					"response": []
+				},
+				{
+					"name": "ordenesItems",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":2,\r\n    \"unitPrice\":15000,\r\n    \"producto\": {\r\n        \"id\":16\r\n    },\r\n    \"orden\":{\r\n        \"id\":9\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/ordenes/10/items"
+					},
+					"response": []
+				},
+				{
+					"name": "pagos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\":\"08-09-2025\",\r\n    \"amount\":333333,\r\n    \"method\":\"PayPal\",\r\n    \"status\":\"Aprobado\",\r\n    \"orden\":{\r\n        \"id\":6\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/pagos"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "put",
+			"item": [
+				{
+					"name": "clientes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"gohanss\",\r\n        \"email\": \"gohanssm@gmail.com\",\r\n        \"direction\": \"calles 12-65\",\r\n        \"phone\": \"3145603209\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/clientes/11"
+					},
+					"response": []
+				},
+				{
+					"name": "productos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"name\": \"papasss\",\r\n        \"description\": \"rizadas mayonesa\",\r\n        \"price\": 6000.0,\r\n        \"stock\": 80\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/productos/23"
+					},
+					"response": []
+				},
+				{
+					"name": "ordenes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2025-12-24\",\r\n    \"total\": 150000,\r\n    \"status\": \"aujibd9uiawb\",\r\n    \"ordenItems\": [ ],\r\n    \"cliente\": {\r\n        \"id\": 6,\r\n        \"name\": \"goten\",\r\n        \"email\": \"gotenm@gmail.com\",\r\n        \"direction\": \"calle 12-5\",\r\n        \"phone\": \"3145690045\"\r\n\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/ordenes/13"
+					},
+					"response": []
+				},
+				{
+					"name": "ordenesItes",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"quantity\": 2,\r\n        \"unitPrice\": 15000.0,\r\n        \"orden\": {\r\n            \"id\": 6,\r\n            \"total\": 1,\r\n            \"estado\": \"pendiente\",\r\n            \"ordenItems\": [\r\n                {\r\n                    \"cantidad\": 2,\r\n                    \"precioUnitario\": 15000.0,\r\n                    \"producto\": {\r\n                        \"id\": 16,\r\n                        \"nombre\": \"pan\",\r\n                        \"descripcion\": \"pan de sal \",\r\n                        \"precio\": 2000.0,\r\n                        \"stock\": 35,\r\n                        \"hibernateLazyInitializer\": {}\r\n                    }\r\n                }\r\n            ],\r\n            \"cliente\": null,\r\n            \"pagos\": [],\r\n            \"fecha\": \"20-04-1999\",\r\n            \"hibernateLazyInitializer\": {}\r\n        },\r\n        \"producto\": {\r\n            \"id\": 16,\r\n            \"name\": null,\r\n            \"description\": null,\r\n            \"price\": null,\r\n            \"stock\": 35\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/ordenes/6/items/43"
+					},
+					"response": []
+				},
+				{
+					"name": "pagos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"date\": \"100224\",\r\n        \"amount\": 12000,\r\n        \"method\": \"Paypal\",\r\n        \"status\": \"Aprobado\",\r\n        \"orden\": {\r\n            \"id\": 12,\r\n            \"date\": \"20-04-1999\",\r\n            \"total\": 1,\r\n            \"status\": \"pendiente\",\r\n            \"ordenItems\": [],\r\n            \"cliente\": {\r\n                \"id\": 6,\r\n                \"name\": \"goten\",\r\n                \"email\": \"gotenm@gmail.com\",\r\n                \"direction\": \"calle 12-5\",\r\n                \"phone\": \"3145690045\"\r\n            }\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8090/pagos/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "delete",
+			"item": [
+				{
+					"name": "clientes",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8090/clientes/11"
+					},
+					"response": []
+				},
+				{
+					"name": "productos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8090/productos/20"
+					},
+					"response": []
+				},
+				{
+					"name": "ordenes",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8090/ordenes/29"
+					},
+					"response": []
+				},
+				{
+					"name": "ordenesItems",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8090/ordenes/18/items/10"
+					},
+					"response": []
+				},
+				{
+					"name": "pagos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8090/pagos/29"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
