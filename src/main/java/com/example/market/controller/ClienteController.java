@@ -29,15 +29,15 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping
-    public ResponseEntity<String> createClient(@RequestBody ClientDTO clientDTO){
-        clientService.crearCliente(clientDTO);
-        return new ResponseEntity<>("cliente guardado", HttpStatus.CREATED);
+    public ResponseEntity<ClientDTO> save(@RequestBody ClientDTO clientDTO) {
+        ClientDTO savedClient = clientService.crearCliente(clientDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedClient);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateClient(@PathVariable Long id,@RequestBody ClientDTO clientDTO){
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
         clientDTO.setId(id);
-        clientService.actualizarCliente(clientDTO);
-        return new ResponseEntity<>("cliente actualizado", HttpStatus.OK);
+        ClientDTO actualizado = clientService.actualizarCliente(clientDTO);
+        return ResponseEntity.ok(actualizado);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable Long id){

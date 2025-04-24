@@ -22,11 +22,11 @@ public class ClientService {
     public Optional<ClientDTO> obtenerClientePorId(Long id) {
         return clienteImpl.getById(id);
     }
-    public void crearCliente(ClientDTO clientDTO) {
-        clienteImpl.create(clientDTO);
+    public ClientDTO crearCliente(ClientDTO clientDTO) {
+        return clienteImpl.create(clientDTO);
     }
-    public void actualizarCliente(ClientDTO clientDTO) {
-        clienteImpl.update(clientDTO);
+    public ClientDTO actualizarCliente(ClientDTO clientDTO) {
+        return clienteImpl.update(clientDTO);
     }
     public void eliminarCliente(Long id) {
         clienteImpl.delete(id);

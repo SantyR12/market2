@@ -22,16 +22,13 @@ public class OrderService {
         return orderImpl.getById(id);
     }
 
-    public void save(OrderDTO orderDTO) {
-
-        orderImpl.save(orderDTO);
+    public OrderDTO save(OrderDTO orderDTO) {
+        return orderImpl.save(orderDTO);
     }
 
-    public void update(Long id, OrderDTO orderDTO) {
-
-        orderImpl.update(id, orderDTO);
+    public OrderDTO update(Long id, OrderDTO orderDTO) {
+        return orderImpl.update(id, orderDTO);
     }
-
     public void delete(Long id) {
         orderImpl.delete(id);
     }
